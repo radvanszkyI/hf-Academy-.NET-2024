@@ -43,7 +43,7 @@ namespace Academy_2024.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] User data)
         {
-            var user = _userRepository.Updte(id,data);
+            var user = _userRepository.Update(id,data);
             return user == null ? NotFound(): NoContent();
         }
 
