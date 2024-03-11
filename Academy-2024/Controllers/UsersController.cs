@@ -31,6 +31,13 @@ namespace Academy_2024.Controllers
             return user==null ? NotFound() : user;
         }
 
+        // GET api/<UsersController>/adults
+        [HttpGet("{adults}")]
+        public IEnumerable<User> GetAdults(string adults)
+        {
+            return _userRepository.GetAdults();
+        }
+
         // POST api/<UsersController>
         [HttpPost]
         public ActionResult Post([FromBody] User data)

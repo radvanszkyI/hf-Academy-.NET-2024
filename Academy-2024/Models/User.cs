@@ -13,6 +13,11 @@ namespace Academy_2024.Models
         public string? LastName { get; set; }
 
         [Required]
-        public string? Email { get; set; }  
+        public DateOnly DateOfBirth { get; set; }
+
+        [Required]
+        public string? Email { get; set; }
+
+
     }
 }

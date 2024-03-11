@@ -15,18 +15,16 @@ namespace Academy_2024.Repositories
             _context= new ApplicationDbContent();
         }
         public List<User> GetAll() => _context.users.ToList();
+        
+        public List<User> GetAdults()
+        {
+            DateOnly eighteenYearsAgo = DateOnly.FromDateTime(DateTime.Now).AddYears(-18);
+           return _context.users.Where(user => user.DateOfBirth < eighteenYearsAgo).ToList();
+        }
 
+        //LinkQ: memoriaban(list) és adatbázisban(query) is müködik
         public User? GetById(int id) => _context.users.FirstOrDefault(user => user.Id == id);
-        /* public User? GetById(int id)
-         {
-             //LinkQ: memoriaban(list) és adatbázisban(query) is müködik
-             return Users.FirstOrDefault(user => user.Id == id);
-             /*foreach (var user in Users)
-             {
-                 if (user.Id == id) return user;
-             }
-             return null;
-         }*/
+        
         public void Create(User data)
         {
             _context.users.Add(data);
@@ -45,15 +43,7 @@ namespace Academy_2024.Repositories
                 return user;
             }
 
-            /*foreach (var user in _context.users)
-            {
-                if (user.Id == id)
-                {
-                    user.FirstName = data.FirstName;
-                    user.LastName = data.LastName;
-                    return user;
-                }
-            }*/
+           
             return null;
         }
         public bool Delete(int id)
