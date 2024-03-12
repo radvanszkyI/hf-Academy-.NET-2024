@@ -32,7 +32,8 @@ namespace Academy_2024.Controllers
         }
 
         // GET api/<UsersController>/adults
-        [HttpGet("{adults}")]
+        [HttpGet]
+        [Route("adults")]
         public IEnumerable<User> GetAdults(string adults)
         {
             return _userRepository.GetAdults();
