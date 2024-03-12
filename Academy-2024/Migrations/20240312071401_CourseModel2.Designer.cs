@@ -3,6 +3,7 @@ using System;
 using Academy_2024.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Academy_2024.Migrations
 {
     [DbContext(typeof(ApplicationDbContent))]
-    partial class ApplicationDbContentModelSnapshot : ModelSnapshot
+    [Migration("20240312071401_CourseModel2")]
+    partial class CourseModel2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
@@ -33,7 +36,7 @@ namespace Academy_2024.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("courses");
+                    b.ToTable("course");
                 });
 
             modelBuilder.Entity("Academy_2024.Models.User", b =>
