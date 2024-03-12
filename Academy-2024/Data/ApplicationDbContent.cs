@@ -18,5 +18,6 @@ namespace Academy_2024.Data
             => optionsBuilder.UseSqlite($"Data Source={_dbPath}");
 
         public DbSet<User> users { get; set; }
+        public DbSet<Course> course { get; set; }
     }
 }
