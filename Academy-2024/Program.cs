@@ -1,6 +1,8 @@
 
 using Academy_2024.Data;
+using Academy_2024.Options;
 using Academy_2024.Repositories;
+using Academy_2024.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Academy_2024
@@ -18,8 +20,12 @@ namespace Academy_2024
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Jwt"));
 
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUserService, UserService>();
+
+            
             builder.Services.AddDbContext<ApplicationDbContext>(options
                 => options.UseSqlite(builder.Configuration.GetConnectionString("ApplicationDbContext")));
 

@@ -1,5 +1,7 @@
-﻿using Academy_2024.Models;
+﻿using Academy_2024.Dtos;
+using Academy_2024.Models;
 using Academy_2024.Repositories;
+using Academy_2024.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,34 +12,34 @@ namespace Academy_2024.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserRepository _userService;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(IUserService userService)
         {
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
         // GET: api/<UsersController>
         [HttpGet]
         public async Task<IEnumerable<User>> Get()
         {
-            return await _userRepository.GetAllAsync();
+            return await _userService.GetAllAsync();
         }
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> Get(int id)
+        public async Task<ActionResult<UserDto>> Get(int id)
         {
-            var user = await _userRepository.GetByIdAsync(id);
+            var user = await _userService.GetByIdAsync(id);
 
             return user == null ? NotFound() : user;
         }
 
         // POST api/<UsersController>
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] User data)
+        public async Task<ActionResult> Post([FromBody] UserDto data)
         {
-            await _userRepository.CreateAsync(data);
+            await _userService.CreateAsync(data);
 
             return NoContent();
         }
@@ -46,7 +48,7 @@ namespace Academy_2024.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(int id, [FromBody] User data)
         {
-            var user = await _userRepository.UpdateAsync(id, data);
+            var user = await _userService.UpdateAsync(id, data);
 
             return user == null ? NotFound() : NoContent();
         }
@@ -55,7 +57,7 @@ namespace Academy_2024.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            return await _userRepository.DeleteAsync(id) ? NoContent() : NotFound();
+            return await _userService.DeleteAsync(id) ? NoContent() : NotFound();
         }
     }
 }

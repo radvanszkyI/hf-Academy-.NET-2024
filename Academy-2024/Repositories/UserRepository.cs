@@ -23,21 +23,7 @@ namespace Academy_2024.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<User?> UpdateAsync(int id, User data)
-        {
-            var user = await _context.Users.FirstOrDefaultAsync(user => user.Id == id);
-            if (user != null)
-            {
-                user.FirstName = data.FirstName;
-                user.LastName = data.LastName;
-
-                await _context.SaveChangesAsync();
-
-                return user;
-            }
-
-            return null;
-        }
+        public Task UpdateAsync(int id, User data) => _context.SaveChangesAsync();
 
         public async Task<bool> DeleteAsync(int id)
         {
