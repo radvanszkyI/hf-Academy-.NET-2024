@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿﻿using System.ComponentModel.DataAnnotations;
 
 namespace Academy_2024.Models
 {
@@ -9,15 +9,12 @@ namespace Academy_2024.Models
 
         [StringLength(10)]
         public string? FirstName { get; set; }
-        
-        public string? LastName { get; set; }
 
-        [Required]
-        public DateOnly DateOfBirth { get; set; }
+        public string? LastName { get; set; }
 
         [Required]
         public string? Email { get; set; }
 
-
+        public ICollection<Course> Courses { get; set; } = [];
     }
 }

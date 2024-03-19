@@ -9,17 +9,17 @@ namespace Academy_2024.Controllers
     [ApiController]
     public class CoursesController : ControllerBase
     {
-        private CourseRepository _courseRepository;
+        private readonly ICourseRepository _courseRepository;
 
-        public CoursesController()
+        public CoursesController(ICourseRepository courseRepository)
         {
-            _courseRepository = new CourseRepository();
+            _courseRepository = courseRepository;
         }
         // GET: api/<CoursesController>
-        [HttpGet]
-        public IEnumerable<Course> Get()
+        /*[HttpGet]
+        public async Task<IEnumerable<Course>> Get()
         {
-            return _courseRepository.GetAll();
+            return await _courseRepository.GetAllAsync();
         }
 
         // GET api/<CoursesController>/5
@@ -51,6 +51,6 @@ namespace Academy_2024.Controllers
         public ActionResult Delete(int id)
         {
             return _courseRepository.Delete(id) ? NoContent() : NotFound();
-        }
+        }*/
     }
 }

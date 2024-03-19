@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Academy_2024.Migrations
 {
-    [DbContext(typeof(ApplicationDbContent))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20240312071401_CourseModel2")]
     partial class CourseModel2
     {

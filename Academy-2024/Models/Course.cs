@@ -1,15 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿﻿using System.ComponentModel.DataAnnotations;
 
 namespace Academy_2024.Models
 {
     public class Course
     {
         [Key]
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
-        [StringLength(20),Required]
-        public string? Name { get; set; }
+        public string Title { get; set; } = string.Empty;
 
-        public string? Description { get; set; }
+        public ICollection<User> Users { get; set; } = [];
     }
 }
