@@ -4,6 +4,6 @@
     {
         public string Token { get; set; } = null!;
 
-        public DateTimeOffset 
+        public DateTimeOffset Expires { get; set; }
     }
 }

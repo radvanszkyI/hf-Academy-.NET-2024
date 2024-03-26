@@ -3,7 +3,7 @@ using Academy_2024.Models;
 
 namespace Academy_2024.Services
 {
-    public interface IUserService
+       public interface IUserService
     {
         Task CreateAsync(UserDto data);
 
@@ -12,6 +12,8 @@ namespace Academy_2024.Services
         Task<List<UserDto>> GetAllAsync();
 
         Task<UserDto?> GetByIdAsync(int id);
+
+        Task<User?> GetByEmailAsync(string email);
 
         Task<User?> UpdateAsync(int id, UserDto data);
     }

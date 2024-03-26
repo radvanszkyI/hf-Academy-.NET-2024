@@ -2,6 +2,7 @@
 using Academy_2024.Models;
 using Academy_2024.Repositories;
 using Academy_2024.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,9 +11,10 @@ namespace Academy_2024.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
-        private readonly IUserRepository _userService;
+        private readonly IUserService _userService;
 
         public UsersController(IUserService userService)
         {
@@ -21,7 +23,7 @@ namespace Academy_2024.Controllers
 
         // GET: api/<UsersController>
         [HttpGet]
-        public async Task<IEnumerable<User>> Get()
+        public async Task<IEnumerable<UserDto>> Get()
         {
             return await _userService.GetAllAsync();
         }
@@ -46,7 +48,7 @@ namespace Academy_2024.Controllers
 
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] User data)
+        public async Task<ActionResult> Put(int id, [FromBody] UserDto data)
         {
             var user = await _userService.UpdateAsync(id, data);
 

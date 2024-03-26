@@ -7,9 +7,9 @@ namespace Academy_2024.Services
     public class UserService : IUserService
     {
 
-        private readonly IUserRepository _userRepository;
-
-        public UserService(IUserRepository userRepository)
+                private readonly IUserRepository _userRepository;
+        public UserService(
+            IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
@@ -18,11 +18,11 @@ namespace Academy_2024.Services
             => _userRepository.CreateAsync(MapToModel(data));
 
         public Task<bool> DeleteAsync(int id)
-            =>_userRepository.DeleteAsync(id);
+            => _userRepository.DeleteAsync(id);
 
         public async Task<List<UserDto>> GetAllAsync()
         {
-            var users=await _userRepository.GetAllAsync();
+            var users = await _userRepository.GetAllAsync();
 
             return users.Select(MapToDto).ToList();
         }
@@ -31,21 +31,26 @@ namespace Academy_2024.Services
         {
             var user = await _userRepository.GetByIdAsync(id);
 
-            return user != null ? MapToDto(user) : null;
+            return user != null
+                ? MapToDto(user)
+                : null;
         }
+
+        public Task<User?> GetByEmailAsync(string email) => _userRepository.GetByEmailAsync(email);
 
         public async Task<User?> UpdateAsync(int id, UserDto data)
         {
             var user = await _userRepository.GetByIdAsync(id);
 
-            if(user != null)
+            if (user is not null)
             {
-                user.FirstName=data.FirstName;
-                user.LastName=data.LastName;
-                user.Email=data.Email;
+                user.FirstName = data.FirstName;
+                user.LastName = data.LastName;
+                user.Email = data.Email;
 
-                //await _userRepository.UpdateAsync();// hiba az IUserRepositoy
+                await _userRepository.UpdateAsync();
             }
+
             return user;
         }
 
@@ -54,7 +59,8 @@ namespace Academy_2024.Services
             Id = user.Id,
             FirstName = user.FirstName,
             LastName = user.LastName,
-            Email = user.Email
+            Email = user.Email,
+            Password = user.Password
         };
 
         private static User MapToModel(UserDto userDto) => new()
@@ -62,7 +68,8 @@ namespace Academy_2024.Services
             Id = userDto.Id,
             FirstName = userDto.FirstName,
             LastName = userDto.LastName,
-            Email = userDto.Email
+            Email = userDto.Email,
+            Password = userDto.Password
         };
     }
 }
